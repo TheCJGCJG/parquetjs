@@ -1,19 +1,19 @@
-'use strict';
-const parquet = require('..');
+'use strict'
+const parquet = require('..')
 
 // write a new file 'fruits.parquet'
-async function example() {
+async function example () {
   let schema = new parquet.ParquetSchema({
-    name:       { type: 'UTF8' },
-    quantity:   { type: 'INT64', optional: true },
-    price:      { type: 'DOUBLE' },
-    date:       { type: 'TIMESTAMP_MICROS' },
-    in_stock:   { type: 'BOOLEAN' },
-    colour:     { type: 'UTF8', repeated: true },
-    meta_json:  { type: 'BSON', optional: true  },
-  });
+    name: { type: 'UTF8' },
+    quantity: { type: 'INT64', optional: true },
+    price: { type: 'DOUBLE' },
+    date: { type: 'TIMESTAMP_MICROS' },
+    in_stock: { type: 'BOOLEAN' },
+    colour: { type: 'UTF8', repeated: true },
+    meta_json: { type: 'BSON', optional: true }
+  })
 
-  let writer = await parquet.ParquetWriter.openFile(schema, 'fruits.parquet');
+  let writer = await parquet.ParquetWriter.openFile(schema, 'fruits.parquet')
 
   await writer.appendRow({
     name: 'apples',
@@ -22,7 +22,7 @@ async function example() {
     date: new Date(),
     in_stock: true,
     colour: [ 'green', 'red' ]
-  });
+  })
 
   await writer.appendRow({
     name: 'oranges',
@@ -31,7 +31,7 @@ async function example() {
     date: new Date(),
     in_stock: true,
     colour: [ 'orange' ]
-  });
+  })
 
   await writer.appendRow({
     name: 'kiwi',
@@ -40,10 +40,9 @@ async function example() {
     in_stock: false,
     colour: [ 'green', 'brown' ],
     meta_json: { expected_ship_date: new Date() }
-  });
+  })
 
-  await writer.close();
+  await writer.close()
 }
 
-example();
-
+example()

@@ -1,17 +1,16 @@
-'use strict';
-const parquet = require('..');
+'use strict'
+const parquet = require('..')
 
-async function example() {
-  let reader = await parquet.ParquetReader.openFile('fruits.parquet');
+async function example () {
+  let reader = await parquet.ParquetReader.openFile('fruits.parquet')
 
-  let cursor = reader.getCursor();
-  let record = null;
+  let cursor = reader.getCursor()
+  let record = null
   while (record = await cursor.next()) {
-    console.log(record);
+    console.log(record)
   }
 
-  reader.close();
+  reader.close()
 }
 
-example();
-
+example()
